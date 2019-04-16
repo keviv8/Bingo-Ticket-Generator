@@ -19,6 +19,7 @@ public class ticketGen {
 				System.out.println("Map Co-ordinates BAD");
 				continue;
 			} else {
+				
 				System.out.println("Map co-ordinates are :\n\t\t\t" + mapCoordinates.subList(0, 9) + "\n\t\t\t"
 						+ mapCoordinates.subList(9, 18) + "\n\t\t\t" + mapCoordinates.subList(18, 27)
 						+ "\nAnd the sum array is:\n\t\t\t" + mapCoordinates.subList(27, mapCoordinates.size()));
