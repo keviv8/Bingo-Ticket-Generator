@@ -1,36 +1,114 @@
 package TicketGen;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Scanner;
 
 public class ticketGen {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AWTException, IOException, InterruptedException {
 
+
+System.out.println(Instant.now());
 		ArrayList<Integer> mapCoordinates = new ArrayList<Integer>();
 		ArrayList<Integer> mapValues = new ArrayList<Integer>();
 		ticketGen tG = new ticketGen();
-		boolean mapRight = false;
-		for (int i = 0; !mapRight; i++) {
-			mapCoordinates = tG.mapMaker();
-			if (mapCoordinates.subList(27, mapCoordinates.size()).contains(0)) {
-				mapRight = false;
-				System.out.println("Map Co-ordinates BAD");
-				continue;
-			} else {
-				
-				System.out.println("Map co-ordinates are :\n\t\t\t" + mapCoordinates.subList(0, 9) + "\n\t\t\t"
-						+ mapCoordinates.subList(9, 18) + "\n\t\t\t" + mapCoordinates.subList(18, 27)
-						+ "\nAnd the sum array is:\n\t\t\t" + mapCoordinates.subList(27, mapCoordinates.size()));
-				break;
+
+		System.out.println("How many tickets?");
+		Scanner in = new Scanner(System.in);
+		int tcount = in.nextInt();
+		Instant start = Instant.now();
+
+//		Scanner s = new Scanner(System.in);
+//		int a, b, count = 0;
+//		a = s.nextInt();
+//		b = s.nextInt();
+//		if (a > b)
+//			for (int i = 1; i <= a; i++)
+//				if (a % i == 0)
+//					count++;
+//		if (b > a)
+//			for (int i = 1; i <= b; i++)
+//				if (b % i == 0)
+//					count++;
+
+		if (tcount == 1011) {
+			int i = 0, j = 0;
+			Robot hal = new Robot();
+			Random random = new Random();
+			while (true) {
+				// Runtime.getRuntime().exec("notepad.exe");
+				// Thread.sleep(2000);
+				// Robot r = new Robot();
+				// r.keyPress(KeyEvent.VK_T);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_H);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_I);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_S);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_SPACE);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_I);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_S);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_SPACE);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_F);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_U);
+				// Thread.sleep(500);
+				// r.keyPress(KeyEvent.VK_N);
+				hal.delay(1000 * 5);
+				int x = random.nextInt() % 640;
+				int y = random.nextInt() % 480;
+				hal.mouseMove(i, j);
+				i++;
+				j++;
+
 			}
-		}
-		tG.mapGenerator(mapCoordinates);
-		tG.mapFiller(mapCoordinates,mapValues);
+		} else
+			for (int t = 0; t < tcount; t++) {
+				boolean mapRight = false;
+				for (int i = 0; !mapRight; i++) {
+					 mapCoordinates = tG.mapMaker();
+					if (mapCoordinates.subList(27, mapCoordinates.size()).contains(0)) {
+						mapRight = false;
+						// System.out.println("Map Co-ordinates BAD");
+						continue;
+					} else {
+						// System.out.println("Map co-ordinates are :\n\t\t\t" +
+						// mapCoordinates.subList(0, 9) + "\n\t\t\t"
+						// + mapCoordinates.subList(9, 18) + "\n\t\t\t" + mapCoordinates.subList(18, 27)
+						// + "\nAnd the sum array is:\n\t\t\t" + mapCoordinates.subList(27,
+						// mapCoordinates.size()));
+						break;
+					}
+				}
+				 mapValues = tG.mapGenerator(mapCoordinates);
+				 tG.mapFiller(mapCoordinates, mapValues);
+				 
+				System.out.println("");//// to present
+				System.out.println("_____________________________________________________________________");
+				///// to present
+			}
+		Instant end = Instant.now();
+		System.out.println("Time taken for " + tcount + " tickets generation = "
+				+ (float) ((float) (Duration.between(start, end).toMillis()) / (float) 1000) + " seconds");
 	}
 
 	private static ArrayList<Integer> mapMaker() {
+
+
 		ArrayList<Integer> r1f = new ArrayList<Integer>();
 		ArrayList<Integer> r2f = new ArrayList<Integer>();
 		ArrayList<Integer> r3f = new ArrayList<Integer>();
@@ -52,13 +130,13 @@ public class ticketGen {
 
 					for (int j = 0; j < 9; j++) {
 						int n = (int) Math.floor(Math.random() * 2);
-						// System.out.print(n+"\t");
+//						 System.out.print(n+"\t");
 						row1.add(n);
 					}
 					for (Integer d : row1)
 						s1 += d;
 					if (s1 == 5) {
-						// System.out.println("Row 1 is\t" + row1 + "\t" + sum);
+//						 System.out.println("Row 1 is\t" + row1 + "\t" + sum);
 						r1 = true;
 						s1 = 0;
 						r1f = row1;
@@ -66,13 +144,13 @@ public class ticketGen {
 
 					for (int j = 0; j < 9; j++) {
 						int n = (int) Math.floor(Math.random() * 2);
-						// System.out.print(n+"\t");
+//						 System.out.print(n+"\t");
 						row2.add(n);
 					}
 					for (Integer d : row2)
 						s2 += d;
 					if (s2 == 5) {
-						// System.out.println("Row 2 is\t" + row2 + "\t" + sum);
+//						 System.out.println("Row 2 is\t" + row2 + "\t" + sum);
 						r2 = true;
 						s2 = 0;
 						r2f = row2;
@@ -80,13 +158,13 @@ public class ticketGen {
 
 					for (int j = 0; j < 9; j++) {
 						int n = (int) Math.floor(Math.random() * 2);
-						// System.out.print(n+"\t");
+//						 System.out.print(n+"\t");
 						row3.add(n);
 					}
 					for (Integer d : row3)
 						s3 += d;
 					if (s3 == 5) {
-						// System.out.println("Row 3 is\t" + row3 + "\t" + sum);
+//						 System.out.println("Row 3 is\t" + row3 + "\t" + sum);
 						r3 = true;
 						s3 = 0;
 						r3f = row3;
@@ -104,7 +182,7 @@ public class ticketGen {
 							sumall += f;
 						if (sumall == 15) {
 							for (int r = 0, rc = 0; r < 9; r++) {
-								// System.out.println(r1f + "\n" + r2f + "\n" + r3f);
+//								 System.out.println(r1f + "\n" + r2f + "\n" + r3f);
 								rc = r1f.get(r) + r2f.get(r) + r3f.get(r);
 								sumarray.add(rc);
 								if (rc == 0) {
@@ -116,17 +194,16 @@ public class ticketGen {
 
 						if (sumall != 15) {
 							// System.out.println("Made a mistake");
-							// System.out.println(r1f + "\n" + r2f + "\n" + r3f);
+//							 System.out.println(r1f + "\n" + r2f + "\n" + r3f);
 							all3 = false;
 							sum = 0;
 							break;
 						}
 					}
 				}
-
 				// if (all3 = true && sumall != 15) {
 				// System.out.println("Made a mistake");
-				// System.out.println(r1f + "\n" + r2f + "\n" + r3f+"\t"+sumall);
+//				 System.out.println(r1f + "\n" + r2f + "\n" + r3f+"\t"+sumall);
 				// all3 = false;
 				// continue;
 				// }
@@ -144,8 +221,7 @@ public class ticketGen {
 					continue;
 				}
 			}
-			// System.out.println(r1f + "\n" + r2f + "\n" + r3f + "\t" + sumarray);
-
+//			 System.out.println(r1f + "\n" + r2f + "\n" + r3f + "\t" + sumarray);
 		}
 		returnval.addAll(r1f);
 		returnval.addAll(r2f);
@@ -157,17 +233,12 @@ public class ticketGen {
 	private ArrayList<Integer> mapGenerator(ArrayList<Integer> mapCoordinates) {
 
 
+
 		ArrayList<Integer> col_data = new ArrayList<Integer>();
 		ArrayList<Integer> mapPoints = new ArrayList<Integer>();
 		int[] a = new int[] { 1, 10, 20, 30, 40, 50, 60, 70, 80 };
 		int[] b = new int[] { 9, 19, 29, 39, 49, 59, 69, 79, 90 };
 		int randomer;
-		// for (int i = 0; i < 10; i++) {
-		// int n = (int) Math.floor(Math.random() * 91);
-		// System.out.println(n);
-		// if (!col_data.contains(n) && n >= 1)// && n >= 0 && n < 10
-		// col_data.add(n);
-
 		for (Integer d : mapCoordinates.subList(27, mapCoordinates.size())) {
 			mapPoints.add(d);
 		}
@@ -194,29 +265,49 @@ public class ticketGen {
 							col_data.add(randomer);
 						else {
 							randomer = getRandomNumberInRange(a[k], b[k]);
-							col_data.add(randomer);
+							if (!col_data.contains(randomer))
+								col_data.add(randomer);
+							else {
+								randomer = getRandomNumberInRange(a[k], b[k]);
+								if (!col_data.contains(randomer))
+									col_data.add(randomer);
+								else {
+									randomer = getRandomNumberInRange(a[k], b[k]);
+									if (!col_data.contains(randomer))
+										col_data.add(randomer);
+									else {
+										randomer = getRandomNumberInRange(a[k], b[k]);
+										if (!col_data.contains(randomer))
+											col_data.add(randomer);
+										else {
+											randomer = getRandomNumberInRange(a[k], b[k]);
+											if (!col_data.contains(randomer))
+												col_data.add(randomer);
+											else {
+												randomer = getRandomNumberInRange(a[k], b[k]);
+												if (!col_data.contains(randomer))
+													col_data.add(randomer);
+												else {
+													randomer = getRandomNumberInRange(a[k], b[k]);
+													if (!col_data.contains(randomer))
+														col_data.add(randomer);
+
+												}
+											}
+										}
+									}
+								}
+							}
+
 						}
 					}
 				}
 			}
 		} catch (Exception e) {
 		}
-		// System.out.println(d);
-
-		// boolean rdone = true;
-		// for (int i = 0; i < 9 && rdone; i++) {
-		// int rand = (int) Math.floor(Math.random() * b[i]);
-		// if (rand >= a[i] && rand <= b[i]) {
-		// System.out.println(rand);
-		// rdone = false;
-		// continue;
-		// } else
-		// rdone = true;
-		// }
-
-		// }
 		Collections.sort(col_data);
-		System.out.println(col_data.toString() + " has " + col_data.size());
+		// System.out.println(col_data.toString() + " has " + col_data.size());
+		// System.out.println(col_data.toString());
 		return col_data;
 	}
 
@@ -228,10 +319,68 @@ public class ticketGen {
 		return r.nextInt((max - min) + 1) + min;
 	}
 
-	private void mapFiller(ArrayList<Integer> mapCoordinates,ArrayList<Integer> mapValues) {
-		System.out.println("Map co-ordinates are :\n\t\t\t" + mapCoordinates.subList(0, 9) + "\n\t\t\t"
-				+ mapCoordinates.subList(9, 18) + "\n\t\t\t" + mapCoordinates.subList(18, 27)
-				+ "\nAnd the sum array is:\n\t\t\t" + mapCoordinates.subList(27, mapCoordinates.size()));
+	private void mapFiller(ArrayList<Integer> mapCoordinates, ArrayList<Integer> mapValues) {
+
+
+		ArrayList<Integer> mapPoints = new ArrayList<Integer>();
+		ArrayList<String> ticketNumbers = new ArrayList<String>();
+		// System.out.println("Map co-ordinates are :\n\t\t\t" +
+		// mapCoordinates.subList(0, 9) + "\n\t\t\t"f
+		// + mapCoordinates.subList(9, 18) + "\n\t\t\t" + mapCoordinates.subList(18, 27)
+		// + "\nAnd the sum array is:\n\t\t\t" + mapCoordinates.subList(27,
+		// mapCoordinates.size()));
+		// System.out.println("Ticket Numbers are " + mapValues.toString() + "\nCount =
+		// " + mapValues.size());
+		for (Integer d : mapCoordinates.subList(27, mapCoordinates.size())) {
+			mapPoints.add(d);
+		}
+		try {
+			for (int i = 0, j = 9, k = 18, a = 0; k < 27; i++, j++, k++) {
+				if (mapCoordinates.get(i) == 1) {
+					ticketNumbers.add(mapValues.get(a).toString());
+					a++;
+				} else
+					ticketNumbers.add(" ");
+				if (mapCoordinates.get(j) == 1) {
+					ticketNumbers.add(mapValues.get(a).toString());
+					a++;
+				} else
+					ticketNumbers.add(" ");
+				if (mapCoordinates.get(k) == 1) {
+					ticketNumbers.add(mapValues.get(a).toString());
+					a++;
+				} else
+					ticketNumbers.add(" ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// System.out.println("Ticket is :\n" + ticketNumbers + "\nTicket Size = " +
+		// ticketNumbers.size());
+//		 System.out.println(ticketNumbers);///// to check duplicates
+		// for (int i = 1, j = 2, k = 3; k < ticketNumbers.size();) {
+		// System.out.println(ticketNumbers.get(i) + "\t" + ticketNumbers.get(j) + "\t"
+		// + ticketNumbers.get(k));
+		// i = i + 3;
+		// j = j + 3;
+		// k = k + 3;
+		// }
+
+		for (int i = 0; i < ticketNumbers.size();) {
+			System.out.print(ticketNumbers.get(i) + "\t");//// to present
+			i = i + 3;
+		}
+		System.out.println("");//// to present
+		for (int i = 1; i < ticketNumbers.size();) {
+			System.out.print(ticketNumbers.get(i) + "\t");//// to present
+			i = i + 3;
+		}
+		System.out.println("");//// to present
+		for (int i = 2; i < ticketNumbers.size();) {
+			System.out.print(ticketNumbers.get(i) + "\t");//// to present
+			i = i + 3;
+		}
+
 	}
 
 }
